@@ -97,7 +97,15 @@ app.delete('/delete/:deleteId', userMiddleware, async (req, res) => {
   }
 });
 
-
+app.delete('/deleteall', userMiddleware, async (req, res) => {
+  try {
+    const user = jwt.decode(req.get('authorization').split(' ')[1]).username;
+    await Todo.deleteMany({user});
+    return res.status(200).json({ message : 'All todos deleted successfully' });
+  } catch (err) {
+    return res.status(500).json({ error : 'Server error, try again later'});
+  }
+}); 
 
 
 app.listen(PORT);

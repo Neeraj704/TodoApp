@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema ({
 });
 
 const todoSchema = new mongoose.Schema ({
+  user: String,
   title: String,
   description: String,
   status: Boolean

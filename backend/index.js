@@ -55,10 +55,12 @@ app.post('/signin', async (req, res) => {
 
 app.post('/create', userMiddleware, async (req, res) => {
   try {
+    const user = jwt.decode(req.get('authorization').split(' ')[1]).username;
     const title = req.body.title;
     const description = req.body.description;
     const status = req.body.status;
     const newTodo = await Todo.create({
+      user: user,
       title: title,
       description: description,
       status: status
@@ -67,6 +69,14 @@ app.post('/create', userMiddleware, async (req, res) => {
       message : 'Todo created successfully',
       todoId : newTodo._id
     }); 
+  } catch (err) {
+    return res.status(500).json({ error : 'Server error, try again later'});
+  }
+});
+
+app.get('/read', userMiddleware, async (req, res) => {
+  try {
+
   } catch (err) {
     return res.status(500).json({ error : 'Server error, try again later'});
   }

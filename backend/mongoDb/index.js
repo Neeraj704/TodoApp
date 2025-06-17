@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema ({
 const todoSchema = new mongoose.Schema ({
   title: String,
   description: String,
-  Status: Boolean
+  status: Boolean
 });
 
 const User = mongoose.model('User', userSchema);

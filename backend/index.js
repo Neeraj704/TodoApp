@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { User } = require('./mongoDb');
+const { Todo } = require('./mongoDb');
 const jwt = require('jsonwebtoken');
 const secretKey = "Neeraj@704";
 const userMiddleware = require('./middleware');
@@ -25,7 +26,6 @@ app.post('/signup', async (req, res) => {
       return res.status(208).json({ error : 'A user already exists with this username, signin instead'}); 
     }
   } catch (err) { 
-    console.log(err);
     return res.status(500).json({ error : 'Server error, try again later'});
   }
 }); 
@@ -49,13 +49,27 @@ app.post('/signin', async (req, res) => {
       return res.status(401).json({ error : 'User does not exist, signup instead' });
     }
   } catch (err) { 
-    console.log(err);
     return res.status(500).json({ error : 'Server error, try again later'});
   }
 });
 
-app.post('/create/todo', userMiddleware, async (res, req) => {
-  return res.status(200).json({ message : 'Middleware worked yay' });
+app.post('/create', userMiddleware, async (req, res) => {
+  try {
+    const title = req.body.title;
+    const description = req.body.description;
+    const status = req.body.status;
+    const newTodo = await Todo.create({
+      title: title,
+      description: description,
+      status: status
+    });
+    return res.status(200).json({ 
+      message : 'Todo created successfully',
+      todoId : newTodo._id
+    }); 
+  } catch (err) {
+    return res.status(500).json({ error : 'Server error, try again later'});
+  }
 });
 
 

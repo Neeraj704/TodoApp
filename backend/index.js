@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const { User } = require('./mongoDb');
 const jwt = require('jsonwebtoken');
 const secretKey = "Neeraj@704";
+const userMiddleware = require('./middleware');
 const app = express();
 const PORT = 3000;
 
@@ -53,7 +54,9 @@ app.post('/signin', async (req, res) => {
   }
 });
 
-
+app.post('/create/todo', userMiddleware, async (res, req) => {
+  return res.status(200).json({ message : 'Middleware worked yay' });
+});
 
 
 app.listen(PORT);

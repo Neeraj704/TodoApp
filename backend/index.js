@@ -76,7 +76,12 @@ app.post('/create', userMiddleware, async (req, res) => {
 
 app.get('/read', userMiddleware, async (req, res) => {
   try {
-
+    const user = jwt.decode(req.get('authorization').split(' ')[1]).username;
+    const allTodos = await Todo.find({ user });
+    return res.status(200).json({ 
+      message : 'Here are all your todos',
+      todos : allTodos
+    });
   } catch (err) {
     return res.status(500).json({ error : 'Server error, try again later'});
   }

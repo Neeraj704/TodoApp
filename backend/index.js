@@ -87,5 +87,17 @@ app.get('/read', userMiddleware, async (req, res) => {
   }
 });
 
+app.delete('/delete/:deleteId', userMiddleware, async (req, res) => {
+  try {
+    const toDeleteId = req.params.deleteId;
+    await Todo.findByIdAndDelete(toDeleteId);
+    return res.status(200).json({ message : 'Todo deleted successfully' });
+  } catch (err) {
+    return res.status(500).json({ error : 'Server error, try again later'});
+  }
+});
+
+
+
 
 app.listen(PORT);

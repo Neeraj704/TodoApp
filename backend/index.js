@@ -4,9 +4,11 @@ const { User } = require('./mongoDb');
 const { Todo } = require('./mongoDb');
 const jwt = require('jsonwebtoken');
 const express = require('express');
+const cors = require('cors');
 const secretKey = "Neeraj@704";
 const app = express();
 const PORT = 3000;
+app.use(cors()); 
 app.use(bodyParser.json());
 
 app.post('/signup', async (req, res) => {
@@ -58,6 +60,12 @@ app.post('/create', userMiddleware, async (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
     const status = req.body.status;
+    if (!title) {
+      return res.status(400).json({ error : 'Please input a title' });
+    };
+    if (!description) {
+      return res.status(400).json({ error : 'Please input a description' });
+    };
     const newTodo = await Todo.create({
       user: user,
       title: title,

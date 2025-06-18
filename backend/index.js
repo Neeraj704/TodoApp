@@ -107,5 +107,23 @@ app.delete('/deleteall', userMiddleware, async (req, res) => {
   }
 }); 
 
+app.put('/update/:updateId', userMiddleware, async (req, res) => {
+ try {
+    const toUpdateId = req.params.updateId;
+    const newTitle = req.body.title;
+    const newDescription = req.body.description;
+    const newStatus = req.body.status;
+    await Todo.findByIdAndUpdate(toUpdateId, {
+      title : newTitle,
+      description : newDescription,
+      status : newStatus
+    });
+    return res.status(200).json({ message : 'Todo updated successfully' });
+  } catch (err) { 
+    return res.status(500).json({ error : 'Server error, try again later'});
+  } 
+});
+
+
 
 app.listen(PORT);

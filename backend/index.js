@@ -14,17 +14,18 @@ app.use(bodyParser.json());
 app.post('/signup', async (req, res) => {
   try { 
     const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
-    const findingUser = await User.findOne({ username });
+    const findingUser = await User.findOne({ email });
     if (!findingUser) {
       const newUser = await User.create({ 
-        username: username,    
+        username: username,
+        email: email,    
         password: password
       });
-      console.log(newUser);
       return res.status(201).json({ message : 'User created successfully' });
     } else {
-      return res.status(208).json({ error : 'A user already exists with this username, signin instead'}); 
+      return res.status(208).json({ error : 'An account already exists with this email'}); 
     }
   } catch (err) { 
     return res.status(500).json({ error : 'Server error, try again later'});
@@ -33,12 +34,12 @@ app.post('/signup', async (req, res) => {
 
 app.post('/signin', async (req, res) => {
   try {
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
-    const findingUser = await User.findOne({ username }); 
+    const findingUser = await User.findOne({ email }); 
     if (findingUser) { 
       if (password === findingUser.password) {
-        const userToken = jwt.sign({username, password}, secretKey);
+        const userToken = jwt.sign({email, password}, secretKey);
         return res.status(200).json({ 
           message : 'Signed in successfully',
           token : userToken
@@ -56,20 +57,25 @@ app.post('/signin', async (req, res) => {
 
 app.post('/create', userMiddleware, async (req, res) => {
   try {
-    const user = jwt.decode(req.get('authorization').split(' ')[1]).username;
+    const email = jwt.decode(req.get('authorization').split(' ')[1]).email;
     const title = req.body.title;
     const description = req.body.description;
     const status = req.body.status;
+    const date = req.body.date;
     if (!title) {
       return res.status(400).json({ error : 'Please input a title' });
     };
     if (!description) {
       return res.status(400).json({ error : 'Please input a description' });
     };
+    if (!date) {
+      return res.status(400).json({ error : 'Please select a date' });
+    };
     const newTodo = await Todo.create({
-      user: user,
+      email: email,
       title: title,
       description: description,
+      date: date,
       status: status
     });
     return res.status(200).json({ 
@@ -83,8 +89,8 @@ app.post('/create', userMiddleware, async (req, res) => {
 
 app.get('/read', userMiddleware, async (req, res) => {
   try {
-    const user = jwt.decode(req.get('authorization').split(' ')[1]).username;
-    const allTodos = await Todo.find({ user });
+    const email = jwt.decode(req.get('authorization').split(' ')[1]).email;
+    const allTodos = await Todo.find({ email });
     return res.status(200).json({ 
       message : 'Here are all your todos',
       todos : allTodos
@@ -106,8 +112,8 @@ app.delete('/delete/:deleteId', userMiddleware, async (req, res) => {
 
 app.delete('/deleteall', userMiddleware, async (req, res) => {
   try {
-    const user = jwt.decode(req.get('authorization').split(' ')[1]).username;
-    await Todo.deleteMany({user});
+    const email = jwt.decode(req.get('authorization').split(' ')[1]).email;
+    await Todo.deleteMany({email});
     return res.status(200).json({ message : 'All todos deleted successfully' });
   } catch (err) {
     return res.status(500).json({ error : 'Server error, try again later'});

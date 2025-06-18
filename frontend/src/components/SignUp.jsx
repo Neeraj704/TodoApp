@@ -3,36 +3,24 @@ import React from 'react';
 import { useState } from 'react';
 
 const SignUp = () => {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   
   async function addUserInMongo () {
-    axios.post('http://localhost:3000/signup', {
+    await axios.post('http://localhost:3000/signup', {
       username : username,
-      password : password
+      password : password,
+      email: email
     })
-    .then ((res) => {
-      console.log(res.data);
-    })
-    .catch ((err) => {
-      console.log(err);
-    });
-  } 
+  };
 
   return (
     <div>
       <input placeholder='Enter username' onChange={(e) => {setUsername(e.target.value)}}></input>
-      <br></br>
-      <br></br>
+      <input placeholder='Enter email' onChange={(e) => {setEmail(e.target.value)}}></input>
       <input placeholder='Enter password' onChange={(e) => {setPassword(e.target.value)}}></input>
-      <br></br>
-      <br></br>
       <button onClick={addUserInMongo}>SIGN UP</button>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
     </div>
   )
 }

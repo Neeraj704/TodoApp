@@ -1,41 +1,32 @@
 import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
-  const [username, setUsername] = useState();
+const SignIn = () => {
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const navigate = useNavigate();
   
-  async function addUserInMongo () {
-    axios.post('http://localhost:3000/signin', {
-      username : username,
+  async function checkUserFromMongo () {
+    await axios.post('http://localhost:3000/signin', {
+      email : email,
       password : password
     })
     .then ((res) => {
       const token = res.data.token;
-      localStorage.setItem('jwtToken', token);
+      sessionStorage.setItem('jwtToken', token);
+      navigate('/home');
     })
-    .catch ((err) => {
-      console.log(err);
-    });
-  } 
+  };
 
   return (
     <div>
-      <input placeholder='Enter username' onChange={(e) => {setUsername(e.target.value)}}></input>
-      <br></br>
-      <br></br>
+      <input placeholder='Enter email' onChange={(e) => {setEmail(e.target.value)}}></input>
       <input placeholder='Enter password' onChange={(e) => {setPassword(e.target.value)}}></input>
-      <br></br>
-      <br></br>
-      <button onClick={addUserInMongo}>SIGN IN</button>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      <button onClick={checkUserFromMongo}>SIGN IN</button>
     </div>
   )
 }
 
-export default SignUp;
+export default SignIn;

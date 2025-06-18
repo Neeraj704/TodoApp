@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css'
-import CreateTodo from './components/CreateTodo'
 import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
-import LogOut from './components/LogOut'
 import axios from 'axios'
 import SideBar from './components/SideBar';
 import BasicText from './components/BasicText';
@@ -49,6 +47,7 @@ function App() {
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/home" element={
           <> 
+          <div className='mb-5'>TESTING</div>
           <BasicText></BasicText>
           <SideBar getTodos = {getTodos}></SideBar>
           <Theme></Theme>

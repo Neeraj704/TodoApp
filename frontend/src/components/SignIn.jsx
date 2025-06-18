@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   
   async function checkUserFromMongo () {
@@ -17,7 +17,7 @@ const SignIn = () => {
       const token = res.data.token;
       sessionStorage.setItem('jwtToken', token);
       navigate('/home');
-    })
+    });
   };
 
   return (

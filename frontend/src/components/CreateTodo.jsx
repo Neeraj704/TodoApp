@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 
-const CreateTodo = ({ setShowCreateTodo }) => {
+const CreateTodo = ({ getTodos, setShowCreateTodo }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
@@ -11,12 +11,13 @@ const CreateTodo = ({ setShowCreateTodo }) => {
     setSelectedDate(e.target.value);
   };
   
-  function addTodoInMongo () {
+  async function addTodoInMongo () {
     axios.post('http://localhost:3000/create', {
       title : title,
       description : description,
       date: selectedDate
     });
+    await getTodos();
     setTitle('');
     setDescription('');
     setSelectedDate('');
@@ -24,6 +25,7 @@ const CreateTodo = ({ setShowCreateTodo }) => {
 
   function crossButton () {
     setShowCreateTodo(false);
+    getTodos();     
   };
   
   

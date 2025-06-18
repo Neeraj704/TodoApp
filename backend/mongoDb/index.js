@@ -1,6 +1,10 @@
 const mongoose  = require('mongoose');
+require("dotenv").config();
 
-mongoose.connect('mongodb+srv://Neeraj704sky:Neeraj704sky@todoapp.obqdvdb.mongodb.net/TodoApp');
+const mongooseURL = process.env.MONGOOSE_URL;
+
+
+mongoose.connect(mongooseURL);
 
 const userSchema = new mongoose.Schema ({
   username: String,
@@ -9,7 +13,7 @@ const userSchema = new mongoose.Schema ({
 });
 
 const todoSchema = new mongoose.Schema ({
-  user: String,
+  email: String,
   title: String,
   description: String,
   date: String,

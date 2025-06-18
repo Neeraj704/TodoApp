@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css'
 import CreateTodo from './components/CreateTodo'
@@ -12,9 +12,12 @@ import Theme from './components/Theme';
 import TodoCard from './components/TodoCard';
 import Modal from 'react-modal';
 
+
 Modal.setAppElement('#root');
 
 function App() { 
+  const [allTodos, setAllTodos] = useState([]);
+
   axios.interceptors.request.use(
     function (config) {
       const token = sessionStorage.getItem('jwtToken');
@@ -27,6 +30,16 @@ function App() {
       return Promise.reject(error);
     }
   );
+
+  const getTodos = async () => {
+    const res = await axios.get('http://localhost:3000/read');
+    console.log("Fetched Todos:", res.data.todos);
+    setAllTodos(res.data.todos); 
+  };
+
+  useEffect(() => {
+    getTodos();
+  }, []);
   
   return (
     <>
@@ -35,11 +48,21 @@ function App() {
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/home" element={
-          <>
+          <> 
           <BasicText></BasicText>
-          <SideBar></SideBar>
+          <SideBar getTodos = {getTodos}></SideBar>
           <Theme></Theme>
-          <TodoCard></TodoCard>
+          <div>
+            {allTodos.map((todo, index) => (
+              <TodoCard
+                key={todo._id || index}
+                title={todo.title}
+                description={todo.description}
+                date={todo.date}
+                status={todo.status}
+              />
+            ))}
+          </div>
           </>
         }>
         </Route>

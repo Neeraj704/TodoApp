@@ -5,7 +5,8 @@ const { Todo } = require('./mongoDb');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const cors = require('cors');
-const secretKey = "Neeraj@704";
+require("dotenv").config();
+const secretKey = process.env.JWT_KEY;
 const app = express();
 const PORT = 3000;
 app.use(cors()); 
@@ -39,7 +40,8 @@ app.post('/signin', async (req, res) => {
     const findingUser = await User.findOne({ email }); 
     if (findingUser) { 
       if (password === findingUser.password) {
-        const userToken = jwt.sign({email, password}, secretKey);
+        const username = findingUser.username;
+        const userToken = jwt.sign({email, password, username}, secretKey);
         return res.status(200).json({ 
           message : 'Signed in successfully',
           token : userToken
@@ -62,7 +64,7 @@ app.post('/create', userMiddleware, async (req, res) => {
     const description = req.body.description;
     const status = req.body.status;
     const date = req.body.date;
-    if (!title) {
+    if (!title) { 
       return res.status(400).json({ error : 'Please input a title' });
     };
     if (!description) {

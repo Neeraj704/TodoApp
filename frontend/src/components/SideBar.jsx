@@ -4,12 +4,12 @@ import Modal from 'react-modal';
 import CreateTodo from './CreateTodo';
 
 
-const SideBar = () => {
+const SideBar = (props) => {
 const [showCreateTodo, setShowCreateTodo] = useState(false);
   function clearToken () {
     sessionStorage.removeItem('jwtToken');
   };
-
+ 
   const handleOnClick = () => {
     setShowCreateTodo(true);
   };
@@ -25,11 +25,14 @@ const [showCreateTodo, setShowCreateTodo] = useState(false);
       <button onClick={handleOnClick}>Create</button>
       <button onClick={clearToken}>Log Out</button>
       <Modal
-        isOpen={showCreateTodo}
-        onRequestClose={handleClose}
-        contentLabel="Create Todo Modal"
+        isOpen = {showCreateTodo}
+        onRequestClose = {handleClose}
+        contentLabel = "Create Todo Modal"
       >
-        <CreateTodo setShowCreateTodo={setShowCreateTodo} />
+        <CreateTodo 
+          getTodos = {props.getTodos}
+          setShowCreateTodo= {setShowCreateTodo}
+        />
       </Modal>
     </div>
   )

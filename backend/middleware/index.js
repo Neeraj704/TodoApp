@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
-const secretKey = "Neeraj@704";
+require("dotenv").config();
+
+const secretKey = process.env.JWT_KEY;
 
 async function userMiddleware (req, res, next) {
   try {

@@ -1,14 +1,15 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 
-const TodoCard = () => {
+const TodoCard = (props) => {
 
   return (
     <div>
-      <div>Lorem ipsum</div>
-      <button>Edit</button>
-      <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
-      <div>Incomplete</div>
-      <div>17 June 2025 : 5:04PM</div>
+      <div>
+        <h2>{props.title}</h2>
+        <p>{props.description}</p>
+        <p>{props.date}</p>
+    </div>
     </div>
   )
 }

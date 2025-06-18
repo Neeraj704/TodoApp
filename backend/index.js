@@ -1,13 +1,12 @@
-const express = require('express');
+const userMiddleware = require('./middleware');
 const bodyParser = require('body-parser');
 const { User } = require('./mongoDb');
 const { Todo } = require('./mongoDb');
 const jwt = require('jsonwebtoken');
+const express = require('express');
 const secretKey = "Neeraj@704";
-const userMiddleware = require('./middleware');
 const app = express();
 const PORT = 3000;
-
 app.use(bodyParser.json());
 
 app.post('/signup', async (req, res) => {
@@ -16,7 +15,7 @@ app.post('/signup', async (req, res) => {
     const password = req.body.password;
     const findingUser = await User.findOne({ username });
     if (!findingUser) {
-      const newUser = await User.create({
+      const newUser = await User.create({ 
         username: username,    
         password: password
       });
@@ -123,7 +122,5 @@ app.put('/update/:updateId', userMiddleware, async (req, res) => {
     return res.status(500).json({ error : 'Server error, try again later'});
   } 
 });
- 
-
 
 app.listen(PORT);

@@ -12,7 +12,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   async function addUserInMongo () {
-    await axios.post('http://localhost:3000/signup', {
+    await axios.post('https://todoapp-vlmg.onrender.com/signup', {
       username : username,
       password : password,
       email: email

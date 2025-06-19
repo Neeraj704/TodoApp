@@ -12,7 +12,7 @@ const CreateTodo = ({ getTodos, darkMode, setShowCreateTodo }) => {
 
   
   async function addTodoInMongo () {
-    axios.post('http://localhost:3000/create', {
+    axios.post('https://todoapp-vlmg.onrender.com/create', {
       title : title,
       description : description,
       date: selectedDate

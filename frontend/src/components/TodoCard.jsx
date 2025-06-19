@@ -39,7 +39,7 @@ const TodoCard = ({darkMode, title, description, onStartDrag, date, onEndDrag, s
     const newStatus = !status;
     setStatus(newStatus);
 
-    await axios.put('http://localhost:3000/update', {
+    await axios.put('https://todoapp-vlmg.onrender.com/update', {
       oldTitle: title,
       oldDescription: description,
       status: newStatus

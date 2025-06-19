@@ -6,7 +6,6 @@ import SignIn from './components/SignIn'
 import axios from 'axios'
 import SideBar from './components/SideBar';
 import BasicText from './components/BasicText';
-import Theme from './components/Theme';
 import TodoCard from './components/TodoCard';
 import Modal from 'react-modal';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -48,7 +47,7 @@ function App() {
   }, [darkMode]);
 
   const handleDeleteTodo = async (todo) => {
-    await axios.delete('http://localhost:3000/delete', {
+    await axios.delete('https://todoapp-vlmg.onrender.com/delete', {
       data: {
         title: todo.title,
         description: todo.description,
@@ -58,7 +57,7 @@ function App() {
 };
 
   const getTodos = async () => {
-    const res = await axios.get('http://localhost:3000/read');
+    const res = await axios.get('https://todoapp-vlmg.onrender.com/read');
     console.log("Fetched Todos:", res.data.todos);
     setAllTodos(res.data.todos); 
   };

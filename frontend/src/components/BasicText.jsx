@@ -24,7 +24,7 @@ const BasicText = ({getTodos, darkMode, setDarkMode}) => {
   }, []);
 
   async function refreshTodos () {
-    await axios.get('http://localhost:3000/read')
+    await axios.get('https://todoapp-vlmg.onrender.com/read')
     await getTodos();
   }
 

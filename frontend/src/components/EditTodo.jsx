@@ -14,7 +14,7 @@ const EditTodo = ({ darkMode, puranaTitle, puranaDescription, setShowCreateTodo 
 
 
   async function editTodoInMongo () {
-    await axios.put('http://localhost:3000/update/', {
+    await axios.put('https://todoapp-vlmg.onrender.com/update/', {
       title : title,
       description : description,
       date: selectedDate,

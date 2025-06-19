@@ -38,6 +38,12 @@ app.post('/signin', async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const findingUser = await User.findOne({ email }); 
+    if (!email) {
+      return res.status(410).json({ error : 'Enter the email id to login'});
+    }
+    if (!password) {
+      return res.status(410).json({ error : 'Enter the password to login'});
+    }
     if (findingUser) { 
       if (password === findingUser.password) {
         const username = findingUser.username;

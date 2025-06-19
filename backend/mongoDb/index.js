@@ -7,17 +7,17 @@ const mongooseURL = process.env.MONGOOSE_URL;
 mongoose.connect(mongooseURL);
 
 const userSchema = new mongoose.Schema ({
-  username: String,
-  email: String,
-  password: String
+  username: {type: String, required: true}, 
+  email: {type: String, required: true},
+  password: {type: String, required: true}
 });
 
 const todoSchema = new mongoose.Schema ({
-  email: String,
-  title: String,
-  description: String,
-  date: String,
-  status: { type: Boolean, default: false } 
+  email: {type: String, required: true},
+  title: {type: String, required: true},
+  description: {type: String, required: true},
+  date: {type: String, required: true},
+  status: {type: Boolean, default: false} 
 });
 
 const User = mongoose.model('User', userSchema);

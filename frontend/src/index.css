@@ -1,9 +1,81 @@
 @font-face {
-  font-family: Ubuntu;
-  src: url('../src/fonts/Ubuntu-Bold.ttf');
+  font-family: 'Ubuntu';
+  src: url('./fonts/Ubuntu-Regular.ttf') format('truetype');
+  font-weight: 400;
 }
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./fonts/Ubuntu-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./fonts/Ubuntu-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./fonts/Ubuntu-Italic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 400;
+}
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.dark-datepicker .react-datepicker {
+  background-color: rgb(41, 42, 44);
+  border: 1px white solid;
+  color: #f1f1f1;
+}
+
+.dark-datepicker .react-datepicker__header {
+  background-color: rgb(29, 29, 30);
+  border-bottom: 1px solid #444;
+  color: white;
+}
+
+.dark-datepicker .react-datepicker__day {
+  color: #dfdfdf;
+}
+
+.dark-datepicker .react-datepicker__day--selected,
+.dark-datepicker .react-datepicker__day--keyboard-selected {
+  background-color: rgb(247 104 92); /* Indigo-600 */
+  color: white;
+}
+
+.dark-datepicker .react-datepicker__day:hover {
+  background-color: #ff0000;
+}
+
+/* Top month and year text */
+.dark-datepicker .react-datepicker__current-month {
+  color: white;
+}
+
+.dark-datepicker .react-datepicker__year-read-view--down-arrow,
+.dark-datepicker .react-datepicker__month-read-view--down-arrow {
+  border-top-color: white;
+}
+
+/* Day names (Sun, Mon, etc.) */
+.dark-datepicker .react-datepicker__day-name {
+  color: white;
+}
+
+/* Year dropdown options */
+.dark-datepicker .react-datepicker__year-option,
+.dark-datepicker .react-datepicker__month-option {
+  color: black; /* make white if the dropdown is also dark */
+}
+
+.dark-datepicker .react-datepicker__navigation-icon::before {
+  border-color: white;
+}

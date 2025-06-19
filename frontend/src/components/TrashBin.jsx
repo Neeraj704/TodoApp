@@ -1,6 +1,7 @@
 import { useDrop } from 'react-dnd';
 import binIcon from '../assets/binIcon.png';
 
+
 const TrashBin = ({ show, onDropTodo }) => {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: 'TODO',
@@ -11,20 +12,13 @@ const TrashBin = ({ show, onDropTodo }) => {
   }));
 
   return (
-    <div
-      ref={drop}
-      style={{
-        bottom: show ? '2.5rem' : '-200px',
-        transition: 'bottom 0.5s ease',
-      }}
-      className="fixed left-1/2 -translate-x-1/2 w-full flex justify-center z-50"
-    >
+    <div ref={drop} style={{ bottom: show ? '60px' : '-200px', transition: 'bottom 0.5s ease-in-out',}} className="fixed left-1/2 -translate-x-1/2 w-full flex justify-center z-50">
       <div
         className={`flex flex-col items-center transition-transform duration-300 ${
           isOver ? 'scale-110' : 'scale-100'
         }`}
       >
-        <img src={binIcon} className="w-96" />
+          <img src={binIcon} className='w-[200px]'/>
       </div>
     </div>
   )

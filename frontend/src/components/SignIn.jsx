@@ -46,7 +46,7 @@ const SignIn = () => {
           </div>
           <div className='flex flex-col gap-7 mt-16'>
             <input placeholder='Enter email' onChange={(e) => {setEmail(e.target.value)}} className='min-w-80 p-2 rounded-xl border-none bg-white outline-slate-500 outline-double py-3  inset-ring'></input>
-            <input placeholder='Enter password' onChange={(e) => {setPassword(e.target.value)}} className='min-w-72 p-2 rounded-xl border-none bg-white outline-slate-500 outline-double py-3 inset-ring'></input>
+            <input type='password' placeholder='Enter password' onChange={(e) => {setPassword(e.target.value)}} className='min-w-72 p-2 rounded-xl border-none bg-white outline-slate-500 outline-double py-3 inset-ring'></input>
             <button onClick={checkUserFromMongo} className='bg-[#30C58D] p-2 py-3 rounded-xl'>SIGN IN</button>
             <div className='text-[#4C9FFD] cursor-pointer' onClick={goToSignUp}>Dont have an account yet? Sign Up</div>
           </div>

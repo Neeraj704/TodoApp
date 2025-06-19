@@ -20,6 +20,9 @@ Modal.setAppElement('#root');
 function App() { 
   const [allTodos, setAllTodos] = useState([]);
   const [isDraggingAnyTodo, setIsDraggingAnyTodo] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('darkMode') === 'true';
+  });
 
   axios.interceptors.request.use(
     function (config) {
@@ -34,7 +37,17 @@ function App() {
     }
   );
 
-const handleDeleteTodo = async (todo) => {
+  useEffect(() => {
+    const root = document.documentElement;
+    if (darkMode) {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
+
+  const handleDeleteTodo = async (todo) => {
     await axios.delete('http://localhost:3000/delete', {
       data: {
         title: todo.title,
@@ -59,22 +72,23 @@ const handleDeleteTodo = async (todo) => {
     
     <DndProvider backend={HTML5Backend}>
       <BrowserRouter>
-        <Routes>
+        <Routes className='dark:bg-[#343539]'>
           <Route path="/signup" element={<SignUp/>}/>
           <Route path="/signin" element={<SignIn/>}/>
           <Route path="/home" element={
             <>
-            <div className='flex bg-[#FFFDFA] h-screen'>
-              <div className='w-[112px]'>
-                <SideBar getTodos = {getTodos}></SideBar>
+            <div className='flex bg-[#FFFDFA] dark:bg-[#343539] h-full min-h-screen'>
+              <div className='w-[112px]'> 
+                <SideBar getTodos = {getTodos} darkMode={darkMode}></SideBar>
               </div>
               <div className='flex flex-1 flex-col max-w-full ml-[120px] mr-[120px]'> 
                 <div>
-                  <BasicText getTodos = {getTodos}></BasicText>
+                  <BasicText getTodos = {getTodos} darkMode={darkMode} setDarkMode={setDarkMode}></BasicText>
                 </div>
                 <div className='flex flex-wrap'>
                   {allTodos.map((todo, index) => (
                     <TodoCard
+                      darkMode={darkMode}
                       key={todo._id || index}
                       title={todo.title}
                       description={todo.description}

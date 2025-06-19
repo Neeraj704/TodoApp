@@ -36,7 +36,7 @@ const CreateTodo = ({ getTodos, setShowCreateTodo }) => {
           Create Todo
         </div>
         <div>
-          <img onClick={crossButton} src={cross} className='w-10'></img>
+          <img onClick={crossButton} src={cross} className='w-10 cursor-pointer hover:scale-90 active:scale-75'></img>
         </div>
       </div>
       <div>

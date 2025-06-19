@@ -30,11 +30,11 @@ const SideBar = (props) => {
         <img src={icon} className='cursor-pointer h-[48px]'></img>
       </div>
       <div className='flex flex-col gap-10'>
-        <img src={home} className='cursor-pointer w-[32px] ml-0px grow'></img>
-        <img onClick={handleOnClick} src={plus} className='cursor-pointer h-[32px] grow'/>
+        <img src={home} className='cursor-pointer w-[32px] ml-0px grow hover:scale-90 active:scale-75'></img>
+        <img onClick={handleOnClick} src={plus} className='cursor-pointer h-[32px] grow hover:scale-90 active:scale-75'/>
       </div>
       <div>
-        <img onClick={clearToken} className='cursor-pointer max-w-9' src={logout} ></img>
+        <img onClick={clearToken} className='cursor-pointer max-w-9 hover:scale-90 active:scale-75' src={logout} ></img>
       </div>
       <Modal className='bg-white bg-opacity-100 p-6 rounded-lg w-auto h-auto mx-auto my-auto outline-none' overlayClassName="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center" isOpen = {showCreateTodo} onRequestClose = {handleClose} contentLabel = "Create Todo Modal">
         <CreateTodo getTodos = {props.getTodos} setShowCreateTodo = {setShowCreateTodo}/>

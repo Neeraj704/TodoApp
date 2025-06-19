@@ -10,12 +10,16 @@ import Theme from './components/Theme';
 import TodoCard from './components/TodoCard';
 import Modal from 'react-modal';
 import 'react-datepicker/dist/react-datepicker.css';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import TrashBin from './components/TrashBin';
 
 
 Modal.setAppElement('#root');
 
 function App() { 
   const [allTodos, setAllTodos] = useState([]);
+  const [isDraggingAnyTodo, setIsDraggingAnyTodo] = useState(false);
 
   axios.interceptors.request.use(
     function (config) {
@@ -30,6 +34,16 @@ function App() {
     }
   );
 
+const handleDeleteTodo = async (todo) => {
+    await axios.delete('http://localhost:3000/delete', {
+      data: {
+        title: todo.title,
+        description: todo.description,
+      },
+    });
+    await getTodos();
+};
+
   const getTodos = async () => {
     const res = await axios.get('http://localhost:3000/read');
     console.log("Fetched Todos:", res.data.todos);
@@ -42,38 +56,44 @@ function App() {
   
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/signup" element={<SignUp/>}/>
-        <Route path="/signin" element={<SignIn/>}/>
-        <Route path="/home" element={
-          <>
-          <div className='flex bg-[#FFFDFA] h-screen'>
-            <div className='w-[112px]'>
-              <SideBar getTodos = {getTodos}></SideBar>
-            </div>
-            <div className='flex flex-1 flex-col max-w-full ml-[120px] mr-[120px]'> 
-              <div>
-                <BasicText getTodos = {getTodos}></BasicText>
+    
+    <DndProvider backend={HTML5Backend}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/signup" element={<SignUp/>}/>
+          <Route path="/signin" element={<SignIn/>}/>
+          <Route path="/home" element={
+            <>
+            <div className='flex bg-[#FFFDFA] h-screen'>
+              <div className='w-[112px]'>
+                <SideBar getTodos = {getTodos}></SideBar>
               </div>
-              <div className='flex flex-wrap'>
-                {allTodos.map((todo, index) => (
-                  <TodoCard
-                    key={todo._id || index}
-                    title={todo.title}
-                    description={todo.description}
-                    date={todo.date}
-                    status={todo.status}
-                  />
-                ))}
+              <div className='flex flex-1 flex-col max-w-full ml-[120px] mr-[120px]'> 
+                <div>
+                  <BasicText getTodos = {getTodos}></BasicText>
+                </div>
+                <div className='flex flex-wrap'>
+                  {allTodos.map((todo, index) => (
+                    <TodoCard
+                      key={todo._id || index}
+                      title={todo.title}
+                      description={todo.description}
+                      date={todo.date}
+                      status={todo.status}
+                      onStartDrag={() => setIsDraggingAnyTodo(true)}
+                      onEndDrag={() => setIsDraggingAnyTodo(false)}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-          </>
-        }>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            <TrashBin show={isDraggingAnyTodo} onDropTodo={handleDeleteTodo}/>
+            </>
+          }>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </DndProvider>
     </>
   )
 }

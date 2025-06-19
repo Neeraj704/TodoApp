@@ -5,47 +5,51 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import cross from '../assets/cross.svg';
 
-const EditTodo = ({ getTodos, setShowCreateTodo }) => {
+const EditTodo = ({ puranaTitle, puranaDescription, setShowCreateTodo }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
+  const [oldTitle] = useState(puranaTitle);
+  const [oldDescription] = useState(puranaDescription);
+
 
   async function editTodoInMongo () {
-    axios.put('http://localhost:3000/update/:updateId', {
+    await axios.put('http://localhost:3000/update/', {
       title : title,
       description : description,
-      date: selectedDate
+      date: selectedDate,
+      oldTitle: oldTitle,
+      oldDescription: oldDescription
     });
-    await getTodos();
     setTitle('');
     setDescription('');
     setSelectedDate('');
+    crossButton();
   };
 
   function crossButton () {
     setShowCreateTodo(false);
-    getTodos();     
   };
 
   return (
     <div className='flex flex-col w-max gap-5'>
       <div className="flex justify-between items-center align-middle">
         <div className="text-3xl font-bold underline">
-          Create Todo
+          Edit Todo
         </div>
         <div>
-          <img onClick={crossButton} src={cross} className='w-10'></img>
+          <img onClick={crossButton} src={cross} className='w-10 cursor-pointer hover:scale-90 active:scale-75'></img>
         </div>
       </div>
       <div>
-        <input placeholder='Enter title' className="p-2 max-h-16 border border-black rounded-md w-[640px]" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+        <input placeholder='Enter new title' className="p-2 max-h-16 border border-black rounded-md w-[640px]" value={title} onChange={(e) => setTitle(e.target.value)}></input>
       </div>
       <div className="flex flex-row justify-between">
-          <textarea placeholder="Description..." value={description} onChange={(e) => setDescription(e.target.value)} className="border w-full flex-1 mr-5 rounded-lg pt-3 pl-2 border-black"/>
+          <textarea placeholder="Enter new description..." value={description} onChange={(e) => setDescription(e.target.value)} className="border w-full flex-1 mr-5 rounded-lg pt-3 pl-2 border-black"/>
           <DatePicker className="inline-block rounded-5xl" selected={selectedDate} onChange={(date) => setSelectedDate(date)} inline/>
       </div>
       <div>
-        <button className="w-full bg-[#30C58D] min-h-[42px] rounded-xl" onClick={editTodoInMongo}>Add Todo</button>
+        <button className="w-full bg-[#30C58D] min-h-[42px] rounded-xl" onClick={editTodoInMongo}>Update Todo</button>
       </div>
     </div>
   )

@@ -121,10 +121,20 @@ app.get('/read', userMiddleware, async (req, res) => {
   }
 });
 
-app.delete('/delete/:deleteId', userMiddleware, async (req, res) => {
+app.delete('/delete', userMiddleware, async (req, res) => {
   try {
-    const toDeleteId = req.params.deleteId;
-    await Todo.findByIdAndDelete(toDeleteId);
+    const title = req.body.title;
+    const description = req.body.description;
+    if (!title) { 
+      return res.status(400).json({ error : 'Please input a title' });
+    };
+    if (!description) {
+      return res.status(400).json({ error : 'Please input a description' });
+    };
+    await Todo.findOneAndDelete({
+      title: title,
+      description: description
+    });
     return res.status(200).json({ message : 'Todo deleted successfully' });
   } catch (err) {
     return res.status(500).json({ error : 'Server error, try again later'});
@@ -141,13 +151,18 @@ app.delete('/deleteall', userMiddleware, async (req, res) => {
   }
 }); 
 
-app.put('/update/:updateId', userMiddleware, async (req, res) => {
+app.put('/update', userMiddleware, async (req, res) => {
  try {
-    const toUpdateId = req.params.updateId;
     const newTitle = req.body.title;
     const newDescription = req.body.description;
     const newStatus = req.body.status;
-    await Todo.findByIdAndUpdate(toUpdateId, {
+    const oldTitle = req.body.oldTitle;
+    const oldDescription = req.body.oldDescription;
+    
+    await Todo.findOneAndUpdate({
+      title: oldTitle,
+      description: oldDescription
+    }, {
       title : newTitle,
       description : newDescription,
       status : newStatus

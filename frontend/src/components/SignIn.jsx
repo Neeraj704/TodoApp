@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import icon from '../assets/icon.svg';
+import icon from '../assets/logo.png';
 import loginMan from '../assets/loginMan.svg';
 
 const SignIn = () => {
@@ -33,7 +33,7 @@ const SignIn = () => {
           <img src={loginMan} class></img>
           <div className='absolute left-[130px]'>  
             <div className='font-bold text-4xl mb-7'>Keep life simple</div>
-            <div className='font-normal text-slate-500 max-w-[440px] text-2xl'>Store all your Todo'S in a simple and intutive app that helps you understand what is most important in life.</div>
+            <div className='font-normal text-slate-500 max-w-[440px] text-2xl'>Store all your Todo'S in a simple and intutive app that helps you understand what is most important in life for you.</div>
           </div>  
         </div>
       </div>

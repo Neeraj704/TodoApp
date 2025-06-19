@@ -28,13 +28,13 @@ const BasicText = (props) => {
       <div className='flex justify-between items-center pr-32'>
         <div className='flex align-top relative'>
           <div>
-            <img src={search} className='cursor-pointer absolute bottom-[5px] left-[4px]'></img>
+            <img src={search} className='hover:scale-90 active:scale-75 cursor-pointer absolute bottom-[5px] left-[4px]'></img>
           </div>
           <input placeholder="Search Todo" className='bg-transparent w-[420px] font-normal ml-10 text-xl text-gray-400 border-0 border-b-2 active:border-none active:outline-hidden outline-none'></input>
         </div>
         <div className='flex '>
-          <img src={lightMode} className='cursor-pointer'></img> 
-          <img src={refreshSvg} onClick={refreshTodos} className='ml-8 max-w-6 cursor-pointer'></img>
+          <img src={lightMode} className='cursor-pointer hover:scale-90 active:scale-75'></img> 
+          <img src={refreshSvg} onClick={refreshTodos} className='hover:scale-90 active:scale-75 ml-8 max-w-6 cursor-pointer'></img>
         </div> 
       </div>
       <div className='mb-[80px]'>

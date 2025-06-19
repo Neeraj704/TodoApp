@@ -35,7 +35,7 @@ const SignUp = () => {
           <img src={loginMan}></img>
           <div className='absolute left-[130px]'>  
             <div className='font-bold text-4xl mb-7'>Keep life simple</div>
-            <div className='font-normal text-slate-500 max-w-[440px] text-2xl'>Store all your Todo'S in a simple and intutive app that helps you understand what is most important in life.</div>
+            <div className='font-normal text-slate-500 max-w-[440px] text-2xl'>Store all your Todo'S in a simple and intutive app that helps you understand what is most important in life for you.</div>
           </div>  
         </div>
       </div>

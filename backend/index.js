@@ -17,6 +17,15 @@ app.post('/signup', async (req, res) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
+    if (!email) {
+      return res.status(410).json({ error : 'Enter the email id to signup'});
+    }
+    if (!password) {
+      return res.status(410).json({ error : 'Enter the password to signup'});
+    }
+    if (!username) {
+      return res.status(410).json({ error : 'Enter the username to signup'});
+    }
     const findingUser = await User.findOne({ email });
     if (!findingUser) {
       const newUser = await User.create({ 
@@ -24,7 +33,11 @@ app.post('/signup', async (req, res) => {
         email: email,    
         password: password
       });
-      return res.status(201).json({ message : 'User created successfully' });
+      const userToken = jwt.sign({email, password, username}, secretKey);
+      return res.status(200).json({ 
+        message : 'User created successfully',
+        token : userToken
+      });
     } else {
       return res.status(208).json({ error : 'An account already exists with this email'}); 
     }

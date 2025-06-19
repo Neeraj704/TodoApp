@@ -1,5 +1,5 @@
 import axios from 'axios';
-import icon from '../assets/icon.png';
+import icon from '../assets/logo.png';
 import React from 'react';
 import { useState } from 'react';
 import loginMan from '../assets/loginMan.svg';
@@ -17,6 +17,11 @@ const SignUp = () => {
       password : password,
       email: email
     })
+    .then ((res) => {
+      const token = res.data.token;
+      sessionStorage.setItem('jwtToken', token);
+      navigate('/home');
+    });
   };
 
   function goToSignIn () {
@@ -27,7 +32,7 @@ const SignUp = () => {
     <div className='flex h-screen'>
       <div className='flex-1 relative justify-center align-middle'>
         <div className='bottom-[350px] left-[110px] absolute '>
-          <img src={loginMan} class></img>
+          <img src={loginMan}></img>
           <div className='absolute left-[130px]'>  
             <div className='font-bold text-4xl mb-7'>Keep life simple</div>
             <div className='font-normal text-slate-500 max-w-[440px] text-2xl'>Store all your Todo'S in a simple and intutive app that helps you understand what is most important in life.</div>

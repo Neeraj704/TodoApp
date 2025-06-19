@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import icon from '../assets/icon.png';
+import icon from '../assets/icon.svg';
 import loginMan from '../assets/loginMan.svg';
 
 const SignIn = () => {

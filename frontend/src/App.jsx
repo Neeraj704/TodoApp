@@ -9,6 +9,7 @@ import BasicText from './components/BasicText';
 import Theme from './components/Theme';
 import TodoCard from './components/TodoCard';
 import Modal from 'react-modal';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 Modal.setAppElement('#root');
@@ -53,7 +54,7 @@ function App() {
             </div>
             <div className='flex flex-1 flex-col max-w-full ml-[120px] mr-[120px]'> 
               <div>
-                <BasicText></BasicText>
+                <BasicText getTodos = {getTodos}></BasicText>
               </div>
               <div className='flex flex-wrap'>
                 {allTodos.map((todo, index) => (

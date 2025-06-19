@@ -173,7 +173,8 @@ app.put('/update', userMiddleware, async (req, res) => {
   } 
 });
 
-app.get("/", (c) => c.text("Hello World!"));
-
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
 app.listen(PORT);

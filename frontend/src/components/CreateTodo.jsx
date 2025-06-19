@@ -32,7 +32,7 @@ const CreateTodo = ({ getTodos, setShowCreateTodo }) => {
   return (
     <div>
       <div>Create Todo</div>
-      <button onClick={crossButton}>X</button>
+      <button onClick={crossButton}>XX</button>
       <input type="date" id="date-input" value={selectedDate} onChange={dateChange}></input>
       <input placeholder='Enter title' value={title} onChange={(e) => setTitle(e.target.value)}></input>
       <input placeholder='Enter description' value={description} onChange={(e) => setDescription(e.target.value)}></input>

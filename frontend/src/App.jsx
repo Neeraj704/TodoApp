@@ -46,21 +46,27 @@ function App() {
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/home" element={
-          <> 
-          <div className='mb-5'>TESTING</div>
-          <BasicText></BasicText>
-          <SideBar getTodos = {getTodos}></SideBar>
-          <Theme></Theme>
-          <div>
-            {allTodos.map((todo, index) => (
-              <TodoCard
-                key={todo._id || index}
-                title={todo.title}
-                description={todo.description}
-                date={todo.date}
-                status={todo.status}
-              />
-            ))}
+          <>
+          <div className='flex bg-[#FFFDFA] h-screen'>
+            <div className='w-[112px]'>
+              <SideBar getTodos = {getTodos}></SideBar>
+            </div>
+            <div className='flex flex-1 flex-col max-w-full ml-[120px] mr-[120px]'> 
+              <div>
+                <BasicText></BasicText>
+              </div>
+              <div className='flex flex-wrap'>
+                {allTodos.map((todo, index) => (
+                  <TodoCard
+                    key={todo._id || index}
+                    title={todo.title}
+                    description={todo.description}
+                    date={todo.date}
+                    status={todo.status}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
           </>
         }>

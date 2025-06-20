@@ -10,7 +10,7 @@ A modern, responsive Todo List web application built by using MERN Stack. Users 
 
 | Light Mode | Dark Mode |
 |------------|-----------|
-| ![Light Mode Screenshot](./screenshots/lightmode.png) | ![Dark Mode Screenshot](./screenshots/darkmode.png) |
+| ![Light Mode Screenshot](./screenshots/lightMode.png) | ![Dark Mode Screenshot](./screenshots/darkMode.png) |
 
 ---
 

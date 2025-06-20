@@ -39,7 +39,7 @@ app.post('/signup', async (req, res) => {
         token : userToken
       });
     } else {
-      return res.status(208).json({ error : 'An account already exists with this email'}); 
+      return res.status(401).json({ error : 'An account already exists with this email'}); 
     }
   } catch (err) { 
     return res.status(500).json({ error : 'Server error, try again later'});
@@ -64,7 +64,7 @@ app.post('/signin', async (req, res) => {
         return res.status(200).json({ 
           message : 'Signed in successfully',
           token : userToken
-         });
+        });
       } else {
         return res.status(401).json({ error : 'Incorrect Password' });
       }

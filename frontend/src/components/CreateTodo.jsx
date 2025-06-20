@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import cross from '../assets/cross.svg';
+import cross from '../assets/cross.png';
+import crossd from '../assets/crossd.png';
 
 const CreateTodo = ({ getTodos, darkMode, setShowCreateTodo }) => {
   const [title, setTitle] = useState('');
@@ -36,7 +37,7 @@ const CreateTodo = ({ getTodos, darkMode, setShowCreateTodo }) => {
           Create Todo
         </div>
         <div>
-          <img onClick={crossButton} src={cross} className='w-10 cursor-pointer hover:scale-90 active:scale-75'></img>
+          <img onClick={crossButton} src={darkMode ? crossd : cross} className='mr-2 w-6 cursor-pointer hover:scale-90 active:scale-75'></img>
         </div>
       </div>
       <div>
@@ -54,7 +55,7 @@ const CreateTodo = ({ getTodos, darkMode, setShowCreateTodo }) => {
           </div>
       </div>
       <div>
-        <button className="w-full bg-[#30C58D] min-h-[42px] rounded-xl dark:bg-[#F7685C]" onClick={addTodoInMongo}>Add Todo</button>
+        <button className="w-full bg-[#30C58D] min-h-[42px] rounded-xl dark:bg-[#F7685C] hover:bg-[#51e7ad] active:bg-[#68ffc5] dark:hover:bg-[#ff7a6d] dark:active:bg-[#ff8f84]" onClick={addTodoInMongo}>Add Todo</button>
       </div>
     </div>
   );

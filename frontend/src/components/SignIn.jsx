@@ -15,7 +15,7 @@ const SignIn = () => {
   async function checkUserFromMongo () {
     try {
       setSigninError('');
-      await axios.post('https://todoapp-vlmg.onrender.comsignin', {
+      await axios.post('https://todoapp-vlmg.onrender.com/signin', {
         email : email,
         password : password
       })

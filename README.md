@@ -23,7 +23,7 @@ A modern, responsive Todo List web application built by using MERN Stack. Users 
 - ☑️ Mark tasks as completed
 - 🌙 Light & Dark mode toggle
 - 📱 Responsive UI for mobile and desktop
-- 🔐 Secure session handling (cookie-based)
+- 🔐 Secure session handling (JWT-based)
 - 🧭 Navigate between Sign In / Sign Up / Home
 - 📦 Backend connected to MongoDB (via Mongoose)
 

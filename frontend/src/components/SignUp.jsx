@@ -56,7 +56,7 @@ const SignUp = () => {
     if (isValid) {
       try {
         setSignupError('');
-        const res = await axios.post('https://todoapp-vlmg.onrender.comsignup', {
+        const res = await axios.post('https://todoapp-vlmg.onrender.com/signup', {
           username,
           password,
           email

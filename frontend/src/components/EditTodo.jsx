@@ -51,7 +51,7 @@ const EditTodo = ({ darkMode, puranaTitle, puranaDescription, setShowCreateTodo 
               inline
               className="rounded-2xl"
             />
-          </div>
+          </div> 
       </div>
       <div>
         <button className="w-full bg-[#30C58D] hover:bg-[#51e7ad] active:bg-[#68ffc5] dark:hover:bg-[#ff7a6d] dark:active:bg-[#ff8f84] min-h-[42px] rounded-xl dark:bg-[#F7685C]" onClick={editTodoInMongo}>Update Todo</button>

@@ -60,7 +60,7 @@ const TodoCard = ({darkMode, title, description, onStartDrag, date, onEndDrag, s
   };
 
   return (
-      <div ref={drag} className={`cursor-pointer border border-gray-300 dark:border-none shadow-md my-5 w-[264px] relative h-[240px] rounded-xl p-7 mr-9 hover:scale-105 transition-transform duration-200 ${isDragging ? 'opacity-80 scale-105' : 'opacity-100 scale-100'}`} style={{ backgroundColor: randomBg }}>
+      <div ref={drag} className={`cursor-pointer border border-gray-300 dark:border-none shadow-md my-5 w-[264px] relative h-[240px] rounded-xl p-7 mr-9 hover:scale-110 transition-transform duration-200 ${isDragging ? 'opacity-80 scale-105' : 'opacity-100 scale-100'}`} style={{ backgroundColor: randomBg }}>
         <div>
           <img src={darkMode ? editd : edit} onClick={handleOnClick} className='select-none cursor-pointer w-7 absolute top-[26px] right-[25px] hover:scale-90 active:scale-75'></img>
           <h2 className='select-none text-xl font-bold underline mb-3 w-[180px] text-black line-clamp-1 dark:text-[#FFFFFF]'>{title}</h2>  

@@ -13,15 +13,13 @@ const CreateTodo = ({ getTodos, darkMode, setShowCreateTodo }) => {
 
   
   async function addTodoInMongo () {
-    axios.post('https://todoapp-vlmg.onrender.com/create', {
+    setShowCreateTodo(false);
+    await axios.post('https://todoapp-vlmg.onrender.com/create', {
       title : title,
       description : description,
       date: selectedDate
     });
     await getTodos();
-    setTitle('');
-    setDescription('');
-    setSelectedDate('');
   };
 
   function crossButton () {

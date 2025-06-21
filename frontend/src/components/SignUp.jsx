@@ -100,7 +100,7 @@ const SignUp = () => {
             {emailError && (<div className="text-red-500 text-sm font-medium">{emailError}</div>)}
             <input type='password' placeholder='Enter password' onChange={(e) => {passwordTyping(e)}} className='min-w-72 p-2 rounded-xl border-none bg-white outline-slate-500 outline-double py-3 inset-ring'></input>
             {passwordError && (<div className="text-red-500 text-sm font-medium">{passwordError}</div>)}
-            <button onClick={addUserInMongo} className='bg-[#30C58D] p-2 py-3 rounded-xl'>SIGN UP</button>
+            <button onClick={addUserInMongo} className='bg-[#30C58D] p-2 py-3 rounded-xl hover:bg-[#51e7ad] active:bg-[#68ffc5]'>SIGN UP</button>
             {signupError && (<div className="text-red-500 text-sm font-medium text-center">{signupError}</div>)}
             <div className='text-[#4C9FFD] cursor-pointer' onClick={goToSignIn}>Already have an account? Sign In</div>
           </div>

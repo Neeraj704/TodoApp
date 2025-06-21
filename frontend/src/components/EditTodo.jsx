@@ -14,6 +14,7 @@ const EditTodo = ({ darkMode, puranaTitle, puranaDescription, setShowCreateTodo 
 
 
   async function editTodoInMongo () {
+    setShowCreateTodo(false);
     await axios.put('https://todoapp-vlmg.onrender.com/update/', {
       title : title,
       description : description,
@@ -21,9 +22,6 @@ const EditTodo = ({ darkMode, puranaTitle, puranaDescription, setShowCreateTodo 
       oldTitle: oldTitle,
       oldDescription: oldDescription
     });
-    setTitle('');
-    setDescription('');
-    setSelectedDate('');
     crossButton();
   };
 
@@ -56,7 +54,7 @@ const EditTodo = ({ darkMode, puranaTitle, puranaDescription, setShowCreateTodo 
           </div>
       </div>
       <div>
-        <button className="w-full bg-[#30C58D] min-h-[42px] rounded-xl dark:bg-[#F7685C]" onClick={editTodoInMongo}>Update Todo</button>
+        <button className="w-full bg-[#30C58D] hover:bg-[#51e7ad] active:bg-[#68ffc5] dark:hover:bg-[#ff7a6d] dark:active:bg-[#ff8f84] min-h-[42px] rounded-xl dark:bg-[#F7685C]" onClick={editTodoInMongo}>Update Todo</button>
       </div>
     </div>
   )

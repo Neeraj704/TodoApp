@@ -64,4 +64,4 @@ A modern, responsive Todo List web application built by using MERN Stack. Users 
 
 Neeraj Sharma  
 📧 neerajsky704@gmail.com  
-🔗 [LinkedIn](https://www.linkedin.com/in/neeraj-vishwakarma-80876432b)
+🔗 [LinkedIn](www.linkedin.com/in/neeraj-80876432b)
